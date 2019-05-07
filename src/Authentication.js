@@ -27,6 +27,8 @@ export default class Authentication extends React.Component {
     }
 
     async _pressHandler() {
+        this.setState({error: null})
+
         try {
             await TouchID.authenticate('Use your biometric authentication to login.', {
                 fallbackLabel: 'Use passcode',
@@ -43,17 +45,15 @@ export default class Authentication extends React.Component {
         const { isLoading, biometricType, error } = this.state
         return (
             <View style={styles.container}>
-                {!isLoading &&
-                    <React.Fragment>
-                        <Text style={styles.welcome}>BiometricType: {biometricType || 'NONE'}</Text>
-                        {error &&
-                            <Text style={styles.error}>{error}</Text>
-                        }
-                    </React.Fragment>
+                {isLoading &&
+                        <Text style={styles.welcome}>Loading...</Text>
                 }
                 <TouchableHighlight style={styles.button} onPress={() => this._pressHandler()}>
-                    <Text>Authenticate with Touch ID</Text>
+                    <Text style={styles.buttonText}>Authenticate with {biometricType || 'Passcode'}</Text>
                 </TouchableHighlight>
+                {error &&
+                    <Text style={styles.error}>{error}</Text>
+                }
             </View>
         )
     }
@@ -82,11 +82,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'red'
     },
+    buttonText: {
+        color: '#ffffff',
+    },
     button: {
         margin: 10,
         borderRadius: 4,
         borderWidth: 0.5,
-        borderColor: 'black',
+        backgroundColor: '#1462FF',
         paddingVertical: 15,
         paddingHorizontal: 10,
     }

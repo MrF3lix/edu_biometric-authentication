@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import Authentication from './src/Authentication'
+import MainRouter from './MainRouter'
 export default class App extends Component {
 
     render() {
         return (
-            <Authentication />
+            <MainRouter />
         )
     }
 }

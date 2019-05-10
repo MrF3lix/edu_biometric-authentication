@@ -35,7 +35,9 @@ export default class BiometricAuthentication extends React.Component {
             })
             await AsyncStorage.setItem('refresh_token', '123')
             await AsyncStorage.setItem('access_token', '123')
-            this.setState({ isAuthenticated: true })
+            setTimeout(() => {
+                this.setState({ isAuthenticated: true })
+            }, 500)
         } catch (error) {
             this.setState({ error: error.message, isAuthenticated: false })
         }

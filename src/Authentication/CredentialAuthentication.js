@@ -23,7 +23,9 @@ export default class CredentialAuthentication extends React.Component {
         if (username === 'Admin' && password === 'Admin') {
             await this._storeAccessToken()
             await this._storeRefreshToken()
-            this.setState({ isLoading: false, isAuthenticated: true })
+            setTimeout(() => {
+                this.setState({ isLoading: false, isAuthenticated: true })
+            }, 500)
         } else {
             this.setState({ error: 'Wrong', isLoading: false })
         }
